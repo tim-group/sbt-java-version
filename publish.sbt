@@ -26,8 +26,8 @@ homepage := Some(url("http://jsuereth.com/scala-arm"))
 
 pomExtra := (
   <scm>
-    <url>git@github.com:tim-group/sbt-utc.git</url>
-    <connection>scm:git:git@github.com:tim-group/sbt-utc.git</connection>
+    <url>git@github.com:tim-group/sbt-java-version.git</url>
+    <connection>scm:git:git@github.com:tim-group/sbt-java-version.git</connection>
   </scm>
   <developers>
     <developer>

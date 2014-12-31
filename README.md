@@ -1,15 +1,16 @@
-sbt-utc
+sbt-java-version
 =======
-[![Build Status](https://travis-ci.org/tim-group/sbt-utc.svg?branch=master)](https://travis-ci.org/tim-group/sbt-utc)
-
+[![Build Status](https://travis-ci.org/tim-group/sbt-java-version.svg?branch=master)](https://travis-ci.org/tim-group/sbt-java-version)
 
 Summary
 -------
-Enables developers in different timezones to always have a consistent timezone.  Sets timezone of SBT build to UTC.
+Ensures that code is compiled using targeted Java version. 
 
 Usage
 -----
-Available via Maven central.  Add to `project/plugins.sbt`:
+Not yet published to a Maven or Ivy central repository---please open up an Issue if you find this pl
+ugin useful and would like it published.
 
-     addSbtPlugin("com.timgroup" % "sbt-utc" % "0.0.14")
-     
+Workaround: compile locally and publish locally:
+
+     sbt -DBUILD_VERSION=1 publishLocal

@@ -1,20 +1,20 @@
 import sbt._
 import Keys._
 
-object SbtUtcBuild extends Build with BuildExtra {
+object SbtJavaVersionBuild extends Build with BuildExtra {
 
   lazy val lib_jodatime = Seq(
     "joda-time" % "joda-time"    % "2.3"   % "optional",
     "org.joda"  % "joda-convert" % "1.3.1" % "optional"
   )
 
-  val sbtUtc = Project("sbt-utc", file("."))
+  val sbtJavaVersion = Project("sbt-java-version", file("."))
     .settings(
       sbtPlugin    := true,
       organization := "com.timgroup",
-      name         := "sbt-utc",
+      name         := "sbt-java-version",
       version      := "0.0." + System.getProperty("BUILD_NUMBER", "0-SNAPSHOT"),
-      sbtVersion   in Global := "0.13.6",
+      sbtVersion   in Global := "0.13.7",
       scalaVersion in Global := "2.10.4",
       libraryDependencies ++= lib_jodatime
     )
