@@ -13,7 +13,7 @@ object SbtJavaVersion extends Plugin {
   private def shortVersion(version: String): String = version.split("\\.").last
   private def manifestAttributes(version: String): Map[String, String] = Map("X-Java-Version" -> shortVersion(version))
 
-  private val targetVersion  = (javaVersion in target)     or (javaVersion in ThisBuild) or (javaVersion in Global)
+  private val targetVersion  = (javaVersion in target)     or (javaVersion in ThisBuild)
   private val sourceVersion  = (javaVersion in javaSource) or targetVersion
   private val packageVersion = (javaVersion in packageBin) or targetVersion
 
