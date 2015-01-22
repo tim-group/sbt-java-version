@@ -13,7 +13,7 @@ object SbtJavaVersion extends Plugin {
   private def shortVersion(version: String): String = version.split("\\.").last
   private def manifestAttributes(version: String): Map[String, String] = Map("X-Java-Version" -> shortVersion(version))
 
-  private val targetVersion  = (javaVersion in target)     or (javaVersion in ThisBuild)
+  private val targetVersion  = (javaVersion in target)     or (javaVersion in ThisBuild) or (javaVersion in Global)
   private val sourceVersion  = (javaVersion in javaSource) or targetVersion
   private val packageVersion = (javaVersion in packageBin) or targetVersion
 
@@ -27,7 +27,7 @@ object SbtJavaVersion extends Plugin {
   }
 
   override lazy val globalSettings = Seq(
-    javaVersion in ThisBuild := "1.6", // default, can be overridden in Build
+    javaVersion in Global := "1.6", // default, can be overridden in Build
     initialize := {
       val _ = initialize.value // run the previous initialization
       val required = VersionNumber((javaVersion in ThisBuild).value)
