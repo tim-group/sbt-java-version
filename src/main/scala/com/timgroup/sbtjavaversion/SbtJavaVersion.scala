@@ -32,7 +32,7 @@ object SbtJavaVersion extends Plugin {
       val _ = initialize.value // run the previous initialization
       val required = VersionNumber((javaVersion in ThisBuild).value)
       val curr = VersionNumber(sys.props("java.specification.version"))
-      println(s"Ensuring current java version ${required} >= ${curr}")
+      println(s"Ensuring current java version ${curr} >= ${required} required")
       assert(CompatibleJavaVersion(curr, required), s"Java $required or above required, found $curr instead")
     }
   )
