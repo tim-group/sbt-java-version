@@ -47,4 +47,4 @@ ugin useful and would like it published.
 
 Workaround: compile locally and publish locally:
 
-     sbt -DBUILD_VERSION=1 publishLocal
+     sbt -DBUILD_NUMBER=1 publishLocal
