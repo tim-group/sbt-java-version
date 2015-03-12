@@ -8,7 +8,11 @@ import Keys._
  * Based on suggestions to this question:
  *   http://stackoverflow.com/q/19208942
  */
-object SbtJavaVersion extends Plugin {
+object SbtJavaVersion extends AutoPlugin {
+  object autoImport {
+    val javaVersion = SettingKey[String]("java-version", "Set the version of java in target, javaSource, packageBin.")
+  }
+
   import SbtJavaVersionKeys._
   private def shortVersion(version: String): String = version.split("\\.").last
   private def manifestAttributes(version: String): Map[String, String] = Map("X-Java-Version" -> shortVersion(version))
@@ -39,7 +43,7 @@ object SbtJavaVersion extends Plugin {
 }
 
 object SbtJavaVersionKeys {
-  val javaVersion = SettingKey[String]("java-version", "Set the version of java in target, javaSource, packageBin.")
+  val javaVersion = SbtJavaVersion.autoImport.javaVersion
 }
 
 private object CompatibleJavaVersion extends VersionNumberCompatibility {
