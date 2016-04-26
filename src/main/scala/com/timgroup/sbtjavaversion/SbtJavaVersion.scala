@@ -21,8 +21,18 @@ object SbtJavaVersion extends AutoPlugin {
   private val sourceVersion  = (javaVersion in javaSource) or targetVersion
   private val packageVersion = (javaVersion in packageBin) or targetVersion
 
+  private def assertCompatibleJavaVersion(required: VersionNumber): Unit = {
+    val curr = VersionNumber(sys.props("java.specification.version"))
+    println(s"Ensuring current java version ${curr} >= ${required} required")
+    assert(CompatibleJavaVersion(curr, required), s"Java $required or above required, found $curr instead")
+  }
+
   override lazy val projectSettings = {
     Seq(
+      initialize := {
+        val _ = initialize.value
+        assertCompatibleJavaVersion(VersionNumber((javaVersion).value))
+      },
       packageOptions in (Compile, packageBin) +=
         Package.ManifestAttributes(manifestAttributes(packageVersion.value).toSeq:_*),
       scalacOptions += s"-target:jvm-${targetVersion.value}",
@@ -33,11 +43,8 @@ object SbtJavaVersion extends AutoPlugin {
   override lazy val globalSettings = Seq(
     javaVersion in Global := "1.6", // default, can be overridden in Build
     initialize := {
-      val _ = initialize.value // run the previous initialization
-      val required = VersionNumber((javaVersion in ThisBuild).value)
-      val curr = VersionNumber(sys.props("java.specification.version"))
-      println(s"Ensuring current java version ${curr} >= ${required} required")
-      assert(CompatibleJavaVersion(curr, required), s"Java $required or above required, found $curr instead")
+      val _ = initialize.value
+      assertCompatibleJavaVersion(VersionNumber((javaVersion).value))
     }
   )
 }
