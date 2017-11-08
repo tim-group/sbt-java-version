@@ -56,7 +56,10 @@ object SbtJavaVersionKeys {
 private object CompatibleJavaVersion extends VersionNumberCompatibility {
   def name = "Java specification compatibility"
   def isCompatible(current: VersionNumber, required: VersionNumber) =
-    current.numbers.zip(required.numbers).forall(n => n._1 >= n._2)
+    current
+      .numbers
+      .zip(required.numbers)
+      .foldRight(required.numbers.size<=current.numbers.size)((a,b) => (a._1 > a._2) || (a._1==a._2 && b))
 
   def apply(current: VersionNumber, required: VersionNumber) = isCompatible(current, required)
 }
