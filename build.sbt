@@ -8,5 +8,5 @@ crossSbtVersions := Vector("0.13.16", "1.0.3")
 publishTo := Some("TIM Group Repo" at "http://repo.youdevise.com:8081/nexus/content/repositories/yd-release-candidates")
 credentials += Credentials(new File("/etc/sbt/credentials"))
 updateOptions := updateOptions.value.withGigahorse(false)
-scalacOptions += "-target:jvm-1.5"
+scalacOptions += "-target:jvm-1.8"
 
